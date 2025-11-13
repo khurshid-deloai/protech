@@ -1,44 +1,90 @@
-import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const menuItems = ['Home', 'About', 'Products', 'Services', 'Service Specialist', 'About Us'];
+  const menuItems = [
+    "HOME",
+    "ABOUT",
+    "PRODUCTS",
+    "SERVICES",
+    "SERVICE SPECIALIST",
+    "ABOUT US",
+  ];
+
+  // Change header style after scrolling
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="bg-slate-900 text-white sticky top-0 z-50 shadow-lg">
-      <div className="container mx-auto px-4">
+    <header
+      className={`fixed left-0 right-0 top-4 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-slate-900/95 shadow-md backdrop-blur-md py-2"
+          : "bg-transparent backdrop-blur-none py-3"
+      } text-white`}
+    >
+      <div className="container mx-auto px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="text-2xl font-bold">Logo</div>
+          {/* Logo */}
+          <div className="text-3xl font-bold tracking-wide flex items-center">
+            <a href="#" className="flex items-center space-x-1 group">
+              <span className="text-green-400 group-hover:text-green-500 transition-colors duration-300">
+                Pro
+              </span>
+              <span className="text-white group-hover:text-gray-200 transition-colors duration-300">
+                Tech
+              </span>
+            </a>
+          </div>
 
-          <nav className="hidden md:flex space-x-8">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-8 text-base font-semibold">
             {menuItems.map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-                className="hover:text-blue-400 transition-colors duration-200"
+                href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                className="hover:text-green-400 transition-colors duration-200"
               >
                 {item}
               </a>
             ))}
-          </nav>
 
+            {/* Contact Button */}
+            <a
+              href="#contact"
+              className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full transition-all duration-200 font-semibold shadow-md"
+            >
+              CONTACT
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
+        {/* Mobile Dropdown Menu */}
         {isMenuOpen && (
-          <nav className="md:hidden pb-4">
-            {menuItems.map((item) => (
+          <nav className="md:hidden flex flex-col space-y-2 pb-4 mt-2 border-t border-gray-700 bg-slate-900/95 rounded-b-lg backdrop-blur-md">
+            {[...menuItems, "CONTACT"].map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-                className="block py-2 hover:text-blue-400 transition-colors duration-200"
+                href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                className={`block py-3 text-[17px] text-center font-semibold transition-colors duration-200 ${
+                  item === "CONTACT"
+                    ? "bg-green-500 text-white rounded-full hover:bg-green-600 mx-4"
+                    : "hover:text-green-400"
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item}
