@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 
 const images = [
-  "https://t3.ftcdn.net/jpg/08/87/00/22/240_F_887002253_7vYldtTibql0W7VEXmhIYrgMqYjJPptL.jpg",
-  "https://media.gettyimages.com/id/157309506/photo/sugar-cane-plantation.jpg?s=612x612&w=0&k=20&c=shTlCdA4kNzXlVoClkEkX9qCACCtdZ2PtJg2R4HO5vI=",
-  "https://t3.ftcdn.net/jpg/03/17/68/54/240_F_317685441_KPojhbRZoKnnc0a27dMAMS1sgqVwGvCR.jpg",
+  "https://images.pexels.com/photos/11466855/pexels-photo-11466855.jpeg",
+  "https://images.pexels.com/photos/11942833/pexels-photo-11942833.jpeg",
+  "https://images.pexels.com/photos/6165053/pexels-photo-6165053.jpeg",
 ];
 
 export default function Home() {
@@ -19,16 +19,14 @@ export default function Home() {
   }, []);
 
   return (
-    <section id="home" className="relative h-screen overflow-hidden">
-      {/* Background images with smooth fade */}
-      <div className="absolute inset-0 w-full h-full">
+    <section id="home" className="relative w-full h-screen overflow-hidden">
+      {/* Slider Wrapper */}
+      <div
+        className="flex transition-transform duration-[1500ms] ease-in-out w-full h-full"
+        style={{ transform: `translateX(-${current * 100}%)` }}
+      >
         {images.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-[2000ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
-              index === current ? "opacity-100 z-10" : "opacity-0 z-0"
-            }`}
-          >
+          <div key={index} className="flex-shrink-0 w-full h-full relative">
             <img
               src={image}
               alt={`Slide ${index + 1}`}
@@ -39,27 +37,27 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Text content */}
-      <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white px-6">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">
+      {/* Text Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 sm:px-8 z-20">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 drop-shadow-lg leading-tight">
           Welcome to Our Platform
         </h1>
-        <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto drop-shadow-md">
+        <p className="text-base sm:text-lg md:text-2xl mb-6 sm:mb-8 max-w-2xl sm:max-w-3xl mx-auto drop-shadow-md">
           Discover amazing products and services tailored just for you
         </p>
-        <button className="bg-white text-blue-500 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors inline-flex items-center gap-2 shadow-md">
+        <button className="bg-white text-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-100 transition-colors inline-flex items-center gap-2 shadow-md">
           Get Started
           <ArrowRight size={20} />
         </button>
       </div>
 
-      {/* Navigation dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+      {/* Navigation Dots */}
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-30">
         {images.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrent(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full transition-all duration-300 ${
               current === index ? "bg-white scale-125" : "bg-white/50"
             }`}
           />

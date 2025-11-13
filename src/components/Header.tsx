@@ -6,12 +6,12 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const menuItems = [
-    "HOME",
-    "ABOUT",
-    "PRODUCTS",
-    "SERVICES",
-    "SERVICE SPECIALIST",
-    "ABOUT US",
+    "Home",
+    "About",
+    "Products",
+    "Services",
+    "Service Specilist",
+    "About Us",
   ];
 
   // Change header style after scrolling
@@ -60,7 +60,7 @@ export default function Header() {
               href="#contact"
               className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-full transition-all duration-200 font-semibold shadow-md"
             >
-              CONTACT
+              Contact
             </a>
           </div>
 
