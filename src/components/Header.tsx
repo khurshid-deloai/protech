@@ -49,20 +49,29 @@ export default function Header() {
         py-2
       "
     >
-      <div className="container mx-auto px-2 md:px-6 flex items-center justify-between">
+      <div className="container mx-auto px-2 md:px-10 flex items-center justify-between">
 
-        {/* Logo */}
-        <div className="flex flex-col leading-tight">
-          <a 
-            href="#home" 
-            className="text-xl md:text-2xl font-bold tracking-wide"
-          >
-            PRO<span className="text-emerald-600"> TECH</span> INTERNATIONAL
-          </a>
+        {/* Logo with Image */}
+        <div className="flex items-center space-x-2">
+          {/* IMAGE BEFORE LOGO */}
+          <img
+            src="/logo.png"  // MUST be inside public/logo.png
+            alt="Protech Logo"
+            className="w-20 h-20 object-contain"
+          />
 
-          <span className="text-[10px] md:text-xs text-center text-gray-600 dark:text-gray-300 mt-1">
-            Specialty Chemical Products for the Sugar Industry
-          </span>
+          <div className="flex flex-col leading-tight">
+            <a 
+              href="#home" 
+              className="text-xl md:text-xl font-bold tracking-wide"
+            >
+              PRO<span className="text-Black-600"> TECH</span> INTERNATIONAL
+            </a>
+
+            <span className="text-[2px] md:text-xs text-gray-600 dark:text-gray-300 mt-1">
+              Specialty Chemical Products for the Sugar Industry
+            </span>
+          </div>
         </div>
 
         {/* Desktop Menu */}
