@@ -6,7 +6,7 @@ export default function Header() {
   const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
-  const menuItems = ["Home", "Products", "Specilists", "Contact"];
+  const menuItems = ["Home", "About", "Products", "Specilists", "Contact"];
 
   // Enable Dark Mode on HTML tag
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function Header() {
         py-3
       "
     >
-      <div className="container mx-auto px-6 md:px-10 flex items-center justify-between">
+      <div className="container mx-auto px-2 md:px-6 flex items-center justify-between">
 
         {/* Logo */}
         <div className="flex flex-col leading-tight">
@@ -57,10 +57,10 @@ export default function Header() {
             href="#home" 
             className="text-xl md:text-2xl font-bold tracking-wide"
           >
-            Pro<span className="text-emerald-600"> Tech</span> International
+            PRO<span className="text-emerald-600"> TECH</span> INTERNATIONAL
           </a>
 
-          <span className="text-[10px] md:text-xs text-gray-600 dark:text-gray-300 mt-1">
+          <span className="text-[10px] md:text-xs text-center text-gray-600 dark:text-gray-300 mt-1">
             Specialty Chemical Products for the Sugar Industry
           </span>
         </div>
@@ -68,7 +68,7 @@ export default function Header() {
         {/* Desktop Menu */}
         <nav
           key={darkMode}
-          className="hidden md:flex items-center space-x-4 text-lg font-medium"
+          className="hidden md:flex items-center space-x-1 text-lg font-medium"
         >
           {menuItems.map((item) => {
             const id = item.toLowerCase();
