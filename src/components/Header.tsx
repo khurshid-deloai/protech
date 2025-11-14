@@ -1,47 +1,33 @@
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
-  const menuItems = [
-    "Home",
-    "About",
-    "Products",
-    "Services",
-    "Network",
-  ];
+  const menuItems = ["Home", "Products", "Specilists", "Contact"];
 
-  // Transparent header ONLY inside home section
+  // Enable Dark Mode on HTML tag
   useEffect(() => {
-    const handleScroll = () => {
-      const homeSection = document.getElementById("home");
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
 
-      if (homeSection) {
-        const bottom = homeSection.offsetHeight;
-
-        // Navbar becomes black only after leaving home
-        setIsScrolled(window.scrollY > bottom - 120);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Scroll Spy
+  // Scroll Spy Effect
   useEffect(() => {
     const handleSpy = () => {
       const sections = menuItems.map((item) =>
-        document.getElementById(item.toLowerCase().replace(/\s+/g, "-"))
+        document.getElementById(item.toLowerCase())
       );
 
       sections.forEach((section) => {
         if (section) {
           const rect = section.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 150) {
+          if (rect.top <= 120 && rect.bottom >= 120) {
             setActiveSection(section.id);
           }
         }
@@ -54,78 +40,114 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
-        isScrolled
-          ? "bg-black/90 backdrop-blur-md py-5"
-          : "bg-transparent py-5"
-      }`}
+      className="
+        fixed top-0 left-0 right-0 z-[100]
+        bg-white dark:bg-black
+        text-black dark:text-white
+        shadow-md
+        transition-all duration-500
+        py-3
+      "
     >
-      <div className="container mx-auto px-6 md:px-10 flex items-center justify-between text-white">
+      <div className="container mx-auto px-6 md:px-10 flex items-center justify-between">
 
         {/* Logo */}
-        <div className="text-4xl font-bold tracking-wide">
-          <a href="#home">
-            Pro<span className="text-emerald-600">Tech</span>
+        <div className="flex flex-col leading-tight">
+          <a 
+            href="#home" 
+            className="text-xl md:text-2xl font-bold tracking-wide"
+          >
+            Pro<span className="text-emerald-600"> Tech</span> International
           </a>
+
+          <span className="text-[10px] md:text-xs text-gray-600 dark:text-gray-300 mt-1">
+            Specialty Chemical Products for the Sugar Industry
+          </span>
         </div>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center space-x-10 text-lg font-medium">
+        <nav
+          key={darkMode}
+          className="hidden md:flex items-center space-x-4 text-lg font-medium"
+        >
           {menuItems.map((item) => {
-            const id = item.toLowerCase().replace(/\s+/g, "-");
+            const id = item.toLowerCase();
             return (
               <a
                 key={id}
                 href={`#${id}`}
-                className={`transition ${
-                  activeSection === id
-                    ? "text-emerald-600"
-                    : "text-white hover:text-emerald-600"
-                }`}
+                className={`
+                  px-4 py-2 rounded-lg
+                  transition-all duration-300 ease-in-out
+                  transform hover:scale-110
+                  
+                  ${
+                    activeSection === id
+                      ? "text-emerald-600 font-semibold"
+                      : "text-black dark:text-white hover:text-emerald-500 dark:hover:text-emerald-400"
+                  }
+                `}
               >
                 {item}
               </a>
             );
           })}
-          <a
-            href="#contact"
-            className="bg-emerald-600 px-4 py-1 rounded-full hover:bg-emerald-600 transition"
+
+          {/* Light/Dark Mode Button */}
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 transition-all duration-300"
           >
-            Contact
-          </a>
+            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
         </nav>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Toggle */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden text-white"
+          className="md:hidden"
         >
-          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <nav className="md:hidden bg-black/90 backdrop-blur-md py-4 space-y-3 text-center">
+        <nav
+          key={darkMode}
+          className="
+            md:hidden bg-white dark:bg-black 
+            py-4 space-y-3 text-center shadow-md
+            transition-all duration-500
+          "
+        >
           {menuItems.map((item) => {
-            const id = item.toLowerCase().replace(/\s+/g, "-");
+            const id = item.toLowerCase();
             return (
               <a
                 key={id}
                 href={`#${id}`}
                 onClick={() => setIsMenuOpen(false)}
-                className="text-white text-lg block py-2 hover:text-emerald-600"
+                className="
+                  block text-base py-2
+                  transition-all duration-300 ease-in-out
+                  transform hover:scale-110
+                  text-black dark:text-white
+                  hover:text-emerald-500 dark:hover:text-emerald-400
+                "
               >
                 {item}
               </a>
             );
           })}
-          <a
-            href="#contact"
-            className="bg-emerald-600 mx-10 rounded-full py-2 block text-white text-lg"
+
+          {/* Mobile Theme Button */}
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 mx-auto transition-all duration-300"
           >
-            Contact
-          </a>
+            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
         </nav>
       )}
     </header>

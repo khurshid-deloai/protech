@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 
 const images = [
-  "https://images.pexels.com/photos/11466855/pexels-photo-11466855.jpeg",
-  "https://images.pexels.com/photos/11942833/pexels-photo-11942833.jpeg",
+  "https://images.pexels.com/photos/10251996/pexels-photo-10251996.jpeg",
   "https://images.pexels.com/photos/6165053/pexels-photo-6165053.jpeg",
+  "https://images.pexels.com/photos/1871133/pexels-photo-1871133.jpeg",
+  "https://images.pexels.com/photos/11477544/pexels-photo-11477544.jpeg",
 ];
 
 export default function Home() {
@@ -39,34 +40,26 @@ export default function Home() {
       </div>
 
       {/* Text Layer */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 sm:px-8 z-20">
-        <h1
-          className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-4 sm:mb-5 drop-shadow-md leading-snug"
-          style={{ fontFamily: 'Calibri, sans-serif', maxWidth: '900px' }}
-        >
-          Empowering the Global Sugar Industry <br />
-          with Innovation, Chemistry and <br />
-          Engineering Excellence
-        </h1>
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-8 z-20">
+       <h1
+  className="
+    text-2xl 
+    sm:text-4xl 
+    md:text-5xl 
+    font-semibold 
+    mb-4 
+    sm:mb-5 
+    drop-shadow-md 
+    leading-snug
+    text-white dark:text-white
+  "
+  style={{ fontFamily: "'Book Antiqua', Palatino, serif", maxWidth: '900px' }}
+>
+  Empowering the Global Sugar Industry <br />
+  with Innovation, Chemistry and <br />
+  Engineering Excellence
+</h1>
 
-        <button
-          className="
-            bg-emerald-600 
-            text-white 
-            px-5 py-2
-            rounded-full 
-            font-semibold 
-            text-base sm:text-lg 
-            transition-all 
-            duration-300 
-            shadow-md
-            hover:bg-emerald-600
-            hover:shadow-lg
-            active:scale-[0.98]
-          "
-        >
-          Explore Our Solutions
-        </button>
       </div>
 
       {/* Slider Dots */}
