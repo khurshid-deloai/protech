@@ -66,7 +66,7 @@ export default function Header() {
         {/* Logo */}
         <div className="text-4xl font-bold tracking-wide">
           <a href="#home">
-            Pro<span className="text-green-500">Tech</span>
+            Pro<span className="text-emerald-600">Tech</span>
           </a>
         </div>
 
@@ -80,8 +80,8 @@ export default function Header() {
                 href={`#${id}`}
                 className={`transition ${
                   activeSection === id
-                    ? "text-green-400"
-                    : "text-white hover:text-green-400"
+                    ? "text-emerald-600"
+                    : "text-white hover:text-emerald-600"
                 }`}
               >
                 {item}
@@ -90,7 +90,7 @@ export default function Header() {
           })}
           <a
             href="#contact"
-            className="bg-green-500 px-4 py-1 rounded-full hover:bg-green-600 transition"
+            className="bg-emerald-600 px-4 py-1 rounded-full hover:bg-emerald-600 transition"
           >
             Contact
           </a>
@@ -115,7 +115,7 @@ export default function Header() {
                 key={id}
                 href={`#${id}`}
                 onClick={() => setIsMenuOpen(false)}
-                className="text-white text-lg block py-2 hover:text-green-400"
+                className="text-white text-lg block py-2 hover:text-emerald-600"
               >
                 {item}
               </a>
@@ -123,7 +123,7 @@ export default function Header() {
           })}
           <a
             href="#contact"
-            className="bg-green-500 mx-10 rounded-full py-2 block text-white text-lg"
+            className="bg-emerald-600 mx-10 rounded-full py-2 block text-white text-lg"
           >
             Contact
           </a>

@@ -51,7 +51,7 @@ export default function Home() {
 
         <button
           className="
-            bg-green-500 
+            bg-emerald-600 
             text-white 
             px-5 py-2
             rounded-full 
@@ -60,7 +60,7 @@ export default function Home() {
             transition-all 
             duration-300 
             shadow-md
-            hover:bg-green-600
+            hover:bg-emerald-600
             hover:shadow-lg
             active:scale-[0.98]
           "
