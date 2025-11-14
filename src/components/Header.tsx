@@ -11,8 +11,7 @@ export default function Header() {
     "About",
     "Products",
     "Services",
-    "Service Specialist",
-    "About Us",
+    "Network",
   ];
 
   // Transparent header ONLY inside home section

@@ -5,8 +5,8 @@ import Home from "./features/Home";
 import About from "./features/About";
 import Products from "./features/Products";
 import Services from "./features/Services";
-import ServiceSpecialist from "./features/ServiceSpecialist";
-import AboutUs from "./features/AboutUs";
+import ServiceSpecialist from "./features/Network";
+import AboutUs from "./features/Contact";
 
 export default function App() {
   return (
