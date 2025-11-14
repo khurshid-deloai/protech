@@ -4,92 +4,129 @@ import { useState, useEffect } from "react";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   const menuItems = [
     "Home",
     "About",
     "Products",
     "Services",
-    "Service Specilist",
+    "Service Specialist",
     "About Us",
   ];
 
-  // Detect scroll
+  // Transparent header ONLY inside home section
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      const homeSection = document.getElementById("home");
+
+      if (homeSection) {
+        const bottom = homeSection.offsetHeight;
+
+        // Navbar becomes black only after leaving home
+        setIsScrolled(window.scrollY > bottom - 120);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Scroll Spy
+  useEffect(() => {
+    const handleSpy = () => {
+      const sections = menuItems.map((item) =>
+        document.getElementById(item.toLowerCase().replace(/\s+/g, "-"))
+      );
+
+      sections.forEach((section) => {
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 150 && rect.bottom >= 150) {
+            setActiveSection(section.id);
+          }
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleSpy);
+    return () => window.removeEventListener("scroll", handleSpy);
+  }, []);
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
         isScrolled
-          ? "bg-black/90 shadow-lg backdrop-blur-md py-6" // BIGGER NAV BAR HERE
-          : "bg-transparent py-4"
+          ? "bg-black/90 backdrop-blur-md py-5"
+          : "bg-transparent py-5"
       }`}
     >
       <div className="container mx-auto px-6 md:px-10 flex items-center justify-between text-white">
-        
+
         {/* Logo */}
-        <div className="text-5xl font-bold tracking-wide flex items-center">
-          <a href="#" className="flex items-center space-x-1 group">
-            <span className="text-green-500 group-hover:text-green-600 transition-colors duration-300">
-              Pro
-            </span>
-            <span className="text-white group-hover:text-gray-300 transition-colors duration-300">
-              Tech
-            </span>
+        <div className="text-4xl font-bold tracking-wide">
+          <a href="#home">
+            Pro<span className="text-green-500">Tech</span>
           </a>
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-10 text-base font-semibold">
-          {menuItems.map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-              className="text-white hover:text-green-400 transition-colors duration-200"
-            >
-              {item}
-            </a>
-          ))}
-
-          {/* Contact Button */}
+        <nav className="hidden md:flex items-center space-x-10 text-lg font-medium">
+          {menuItems.map((item) => {
+            const id = item.toLowerCase().replace(/\s+/g, "-");
+            return (
+              <a
+                key={id}
+                href={`#${id}`}
+                className={`transition ${
+                  activeSection === id
+                    ? "text-green-400"
+                    : "text-white hover:text-green-400"
+                }`}
+              >
+                {item}
+              </a>
+            );
+          })}
           <a
             href="#contact"
-            className="bg-green-500 text-white px-4 py-2 rounded-full transition-all duration-200 font-semibold shadow-md hover:bg-green-600"
+            className="bg-green-500 px-4 py-1 rounded-full hover:bg-green-600 transition"
           >
             Contact
           </a>
-        </div>
+        </nav>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden text-white focus:outline-none"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden text-white"
         >
           {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <nav className="md:hidden flex flex-col space-y-2 pb-4 border-t border-gray-700 bg-black/90 rounded-b-lg backdrop-blur-md">
-          {[...menuItems, "CONTACT"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-              className={`block py-3 text-[17px] text-center font-semibold text-white transition-colors duration-200 ${
-                item === "CONTACT"
-                  ? "bg-green-500 text-white rounded-full hover:bg-green-600 mx-4"
-                  : "hover:text-green-400"
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {item}
-            </a>
-          ))}
+        <nav className="md:hidden bg-black/90 backdrop-blur-md py-4 space-y-3 text-center">
+          {menuItems.map((item) => {
+            const id = item.toLowerCase().replace(/\s+/g, "-");
+            return (
+              <a
+                key={id}
+                href={`#${id}`}
+                onClick={() => setIsMenuOpen(false)}
+                className="text-white text-lg block py-2 hover:text-green-400"
+              >
+                {item}
+              </a>
+            );
+          })}
+          <a
+            href="#contact"
+            className="bg-green-500 mx-10 rounded-full py-2 block text-white text-lg"
+          >
+            Contact
+          </a>
         </nav>
       )}
     </header>

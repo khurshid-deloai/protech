@@ -9,7 +9,6 @@ const images = [
 export default function Home() {
   const [current, setCurrent] = useState(0);
 
-  // Auto-slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
@@ -18,10 +17,13 @@ export default function Home() {
   }, []);
 
   return (
-    <section id="home" className="relative w-full h-screen overflow-hidden">
-      {/* Slider */}
+    <section
+      id="home"
+      className="relative w-full h-screen overflow-hidden z-0"
+    >
+      {/* Slider images */}
       <div
-        className="flex transition-transform duration-[1500ms] ease-in-out w-full h-full"
+        className="flex transition-transform duration-[1500ms] ease-in-out w-full h-full absolute inset-0 z-0"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {images.map((image, index) => (
@@ -36,24 +38,22 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Text Content */}
+      {/* Text Layer */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 sm:px-8 z-20">
-       <h1
-  className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-4 sm:mb-5 drop-shadow-md leading-snug"
-  style={{ fontFamily: "Calibri, sans-serif" }}
->
-  Empowering the Global Sugar Industry with Innovation,
-  Chemistry and Engineering Excellence
-</h1>
+        <h1
+          className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-4 sm:mb-5 drop-shadow-md leading-snug"
+          style={{ fontFamily: 'Calibri, sans-serif', maxWidth: '900px' }}
+        >
+          Empowering the Global Sugar Industry <br />
+          with Innovation, Chemistry and <br />
+          Engineering Excellence
+        </h1>
 
-
-        {/* Button — NO ARROW, NO GLITCH */}
         <button
           className="
             bg-green-500 
             text-white 
-            px-5 sm:px-5
-            py-2 sm:py-2 
+            px-5 py-2
             rounded-full 
             font-semibold 
             text-base sm:text-lg 
@@ -69,13 +69,13 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Navigation Dots */}
-      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-30">
+      {/* Slider Dots */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
         {images.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrent(index)}
-            className={`w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full transition-all duration-300 ${
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
               current === index ? "bg-white scale-125" : "bg-white/50"
             }`}
           />
