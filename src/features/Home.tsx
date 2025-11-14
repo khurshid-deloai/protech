@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { ArrowRight } from "lucide-react";
 
 const images = [
   "https://images.pexels.com/photos/11466855/pexels-photo-11466855.jpeg",
@@ -20,7 +19,7 @@ export default function Home() {
 
   return (
     <section id="home" className="relative w-full h-screen overflow-hidden">
-      {/* Slider Wrapper */}
+      {/* Slider */}
       <div
         className="flex transition-transform duration-[1500ms] ease-in-out w-full h-full"
         style={{ transform: `translateX(-${current * 100}%)` }}
@@ -39,15 +38,34 @@ export default function Home() {
 
       {/* Text Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 sm:px-8 z-20">
-        <h1
-  className="sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 drop-shadow-lg leading-tight"
+       <h1
+  className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-4 sm:mb-5 drop-shadow-md leading-snug"
   style={{ fontFamily: "Calibri, sans-serif" }}
 >
-  Empowering the Global Sugar Industry with Innovation, Chemistry and Engineering Excellence
+  Empowering the Global Sugar Industry with Innovation,
+  Chemistry and Engineering Excellence
 </h1>
-        <button className="bg-green-500 text-white-600 px-6 sm:px-5 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-gray-100 transition-colors inline-flex items-center gap-2 shadow-md">
+
+
+        {/* Button — NO ARROW, NO GLITCH */}
+        <button
+          className="
+            bg-green-500 
+            text-white 
+            px-5 sm:px-5
+            py-2 sm:py-2 
+            rounded-full 
+            font-semibold 
+            text-base sm:text-lg 
+            transition-all 
+            duration-300 
+            shadow-md
+            hover:bg-green-600
+            hover:shadow-lg
+            active:scale-[0.98]
+          "
+        >
           Explore Our Solutions
-          <ArrowRight size={20} />
         </button>
       </div>
 

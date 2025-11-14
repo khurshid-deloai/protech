@@ -5,9 +5,16 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-const menuItems = [ "Home", "About", "Products", "Services", "Service Specilist", "About Us", ];
+  const menuItems = [
+    "Home",
+    "About",
+    "Products",
+    "Services",
+    "Service Specilist",
+    "About Us",
+  ];
 
-  // Detect scroll position
+  // Detect scroll
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
@@ -18,13 +25,14 @@ const menuItems = [ "Home", "About", "Products", "Services", "Service Specilist"
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-black/90 shadow-lg backdrop-blur-md py-2"
+          ? "bg-black/90 shadow-lg backdrop-blur-md py-6" // BIGGER NAV BAR HERE
           : "bg-transparent py-4"
       }`}
     >
       <div className="container mx-auto px-6 md:px-10 flex items-center justify-between text-white">
+        
         {/* Logo */}
-        <div className="text-3xl font-bold tracking-wide flex items-center">
+        <div className="text-5xl font-bold tracking-wide flex items-center">
           <a href="#" className="flex items-center space-x-1 group">
             <span className="text-green-500 group-hover:text-green-600 transition-colors duration-300">
               Pro
@@ -50,7 +58,7 @@ const menuItems = [ "Home", "About", "Products", "Services", "Service Specilist"
           {/* Contact Button */}
           <a
             href="#contact"
-            className="bg-green-500 hover text-white px-3 py-1 rounded-full transition-all duration-200 font-semibold shadow-md"
+            className="bg-green-500 text-white px-4 py-2 rounded-full transition-all duration-200 font-semibold shadow-md hover:bg-green-600"
           >
             Contact
           </a>
